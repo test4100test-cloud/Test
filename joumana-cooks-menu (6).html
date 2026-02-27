@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Joumana Cooks — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #2c6e5a;
+    --green-mid: #3d8b6e;
+    --olive: #aab576;
+    --olive-muted: #bcc5a0;
+    --cream: #f4f1eb;
+    --cream-dark: #e8e4db;
+    --cream-card: #faf8f5;
+    --text-dark: #1c1c1c;
+    --text-body: #3a3a3a;
+    --text-muted: #7a7a7a;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+    background: var(--green-dark);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(44,110,90,0.15) 0%, rgba(44,110,90,0.85) 55%, rgba(44,110,90,0.97) 100%),
+      z-index: 0;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 19px, var(--white) 19px, var(--white) 20px),
+      repeating-linear-gradient(90deg, transparent, transparent 19px, var(--white) 19px, var(--white) 20px);
+  }
+  .hero-content { position: relative; z-index: 2; animation: fadeUp 0.9s ease-out; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.35rem 1rem; border-radius: 50px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--olive-muted); margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 0.25rem;
+  }
+  .hero-script {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.2rem; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; font-weight: 400;
+  }
+  .hero-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .hero-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1.1rem; border-radius: 50px; text-decoration: none;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; transition: all 0.3s;
+  }
+  .hero-btn--primary { background: var(--white); color: var(--green-dark); }
+  .hero-btn--outline {
+    background: rgba(255,255,255,0.1); color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(6px);
+  }
+  .hero-btn:active { transform: scale(0.96); }
+
+  .cat-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white); border-bottom: 1px solid var(--cream-dark);
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    box-shadow: var(--shadow-sm);
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-nav-inner { display: flex; padding: 0 0.25rem; min-width: max-content; }
+  .cat-nav a {
+    display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+    padding: 0.65rem 0.9rem; text-decoration: none;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-muted); white-space: nowrap;
+    border-bottom: 2.5px solid transparent; transition: all 0.3s;
+  }
+  .cat-nav a .nav-icon { font-size: 1.1rem; }
+  .cat-nav a:hover, .cat-nav a.active { color: var(--green-dark); border-color: var(--green-dark); }
+
+  .section-banner {
+    position: relative; height: 180px; margin: 0 1rem;
+    border-radius: var(--radius); overflow: hidden; margin-top: 1.5rem; box-shadow: var(--shadow-md);
+  }
+  .section-banner img { width: 100%; height: 100%; object-fit: cover; }
+  .section-banner-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(44,110,90,0.8) 0%, rgba(170,181,118,0.6) 100%);
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.25rem;
+  }
+  .section-banner-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .section-banner-sub {
+    font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .menu-section { padding: 1rem 1rem 0.5rem; }
+  .menu-card {
+    background: var(--cream-card); border-radius: var(--radius);
+    padding: 1rem 1.1rem; margin-bottom: 0.6rem; box-shadow: var(--shadow-sm);
+    display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+    transition: transform 0.2s; position: relative; overflow: hidden;
+  }
+  .menu-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, var(--green-dark), var(--olive));
+    border-radius: 0 4px 4px 0; opacity: 0; transition: opacity 0.3s;
+  }
+  .menu-card:active { transform: scale(0.985); }
+  .menu-card:active::before { opacity: 1; }
+  .card-info { flex: 1; }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem;
+  }
+  .card-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; font-weight: 300; }
+  .card-price {
+    font-size: 0.82rem; font-weight: 700; color: var(--green-dark); white-space: nowrap;
+    background: rgba(44,110,90,0.08); padding: 0.3rem 0.7rem; border-radius: 50px; flex-shrink: 0;
+  }
+  .card-thumb {
+    width: 65px; height: 65px; border-radius: 12px; object-fit: cover;
+    flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .variant-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 1.2rem 0.5rem 2rem; margin-bottom: 0.3rem;
+    background: var(--cream-card); border-radius: 10px; box-shadow: var(--shadow-sm);
+  }
+  .variant-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
+  .variant-price { font-size: 0.78rem; font-weight: 700; color: var(--green-dark); white-space: nowrap; }
+
+  .featured-card {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    border-radius: var(--radius); padding: 1.25rem; margin: 0.8rem 1rem 0.6rem;
+    display: flex; gap: 1rem; align-items: center; box-shadow: var(--shadow-md);
+    position: relative; overflow: hidden;
+  }
+  .featured-badge {
+    position: absolute; top: 0.6rem; right: 0.8rem; font-size: 0.6rem;
+    background: var(--olive); color: var(--white); padding: 0.2rem 0.6rem;
+    border-radius: 50px; letter-spacing: 0.08em; font-weight: 700; text-transform: uppercase;
+  }
+  .featured-img {
+    width: 80px; height: 80px; border-radius: 14px; object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.2); flex-shrink: 0;
+  }
+  .featured-info { flex: 1; }
+  .featured-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem;
+  }
+  .featured-desc {
+    font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.4;
+    font-weight: 300; margin-bottom: 0.4rem;
+  }
+  .featured-price { font-size: 0.9rem; font-weight: 700; color: var(--olive-muted); }
+
+
+  .footer {
+    background: var(--green-dark); color: rgba(255,255,255,0.85);
+    padding: 2.5rem 1.5rem; margin-top: 1.5rem; position: relative; overflow: hidden;
+  }
+  .footer::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 19px, var(--white) 19px, var(--white) 20px),
+      repeating-linear-gradient(90deg, transparent, transparent 19px, var(--white) 19px, var(--white) 20px);
+  }
+  .footer-inner { position: relative; z-index: 1; text-align: center; }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--white); margin-bottom: 1.2rem;
+  }
+  .footer-grid { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .footer-link {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
+    text-decoration: none; color: rgba(255,255,255,0.85); font-size: 0.85rem;
+    font-weight: 400; transition: all 0.3s; backdrop-filter: blur(4px);
+  }
+  .footer-link:active { background: rgba(255,255,255,0.15); transform: scale(0.97); }
+  .footer-link-icon { font-size: 1.1rem; }
+  .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .menu-card, .variant-row, .featured-card {
+    opacity: 0; animation: fadeUp 0.5s ease-out forwards;
+  }
+  .menu-card:nth-child(1) { animation-delay: 0.05s; }
+  .menu-card:nth-child(2), .variant-row:nth-child(2) { animation-delay: 0.1s; }
+  .menu-card:nth-child(3), .variant-row:nth-child(3) { animation-delay: 0.15s; }
+  .menu-card:nth-child(4) { animation-delay: 0.2s; }
+  .menu-card:nth-child(5) { animation-delay: 0.25s; }
+  .menu-card:nth-child(6) { animation-delay: 0.3s; }
+  .menu-card:nth-child(7) { animation-delay: 0.35s; }
+
+  @media (min-width: 600px) {
+    body {
+      max-width: 430px; margin: 0 auto;
+      box-shadow: 0 0 60px rgba(0,0,0,0.1);
+      border-left: 1px solid var(--cream-dark); border-right: 1px solid var(--cream-dark);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🍴 Est. Beirut</div>
+    <h1 class="hero-title">Joumana<br>Cooks</h1>
+    <p class="hero-script">Homemade with love</p>
+    <div class="hero-actions">
+      <a href="tel:03097752" class="hero-btn hero-btn--primary">📞 Call Us</a>
+      <a href="https://www.instagram.com/joumanacooks" target="_blank" class="hero-btn hero-btn--outline">📸 Instagram</a>
+      <a href="https://maps.app.goo.gl/c7cf1BY9dtF4Bq4i8" target="_blank" class="hero-btn hero-btn--outline">📍 Find Us</a>
+    </div>
+  </div>
+</header>
+
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#mains" class="active"><span class="nav-icon">🍽️</span>Mains</a>
+    <a href="#salads"><span class="nav-icon">🥗</span>Salads</a>
+    <a href="#man2oushi"><span class="nav-icon">🫓</span>Man2oushi</a>
+    <a href="#sandwiches"><span class="nav-icon">🥪</span>Sandwiches</a>
+    <a href="#hot-cold"><span class="nav-icon">☕</span>Drinks</a>
+    <a href="#cold-drinks"><span class="nav-icon">🧊</span>Cold</a>
+    <a href="#shisha"><span class="nav-icon">💨</span>Shisha</a>
+  </div>
+</nav>
+
+<!-- MAIN DISHES -->
+<div class="section-banner" id="mains">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Main Dishes</div>
+    <div class="section-banner-sub">Hearty &amp; satisfying</div>
+  </div>
+</div>
+
+<div class="featured-card">
+  <div class="featured-info">
+    <div class="featured-name">Steak</div>
+    <div class="featured-desc">With French fries or mashed potatoes &amp; salad</div>
+    <div class="featured-price">1,260,000 L.L</div>
+  </div>
+  <div class="featured-badge">⭐ Popular</div>
+</div>
+
+<section class="menu-section">
+  <div class="menu-card">
+    <div class="card-info">
+      <div class="card-name">Grilled Chicken</div>
+      <div class="card-desc">With garlic, potatoes, vegetables &amp; sauce</div>
+    </div>
+    <div class="card-price">990,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info">
+      <div class="card-name">Potato Gratin</div>
+      <div class="card-desc">Creamy baked potato gratin</div>
+    </div>
+    <div class="card-price">720,000 L.L</div>
+  </div>
+</section>
+
+<!-- SALADS -->
+<div class="section-banner" id="salads">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Salads</div>
+    <div class="section-banner-sub">Fresh &amp; crisp</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Caesar Salad</div></div>
+  </div>
+  <div class="variant-row"><span class="variant-label">Without chicken</span><span class="variant-price">545,000 L.L</span></div>
+  <div class="variant-row"><span class="variant-label">With grilled chicken</span><span class="variant-price">765,000 L.L</span></div>
+
+  <div class="menu-card" style="margin-top:0.4rem">
+    <div class="card-info"><div class="card-name">Greek Salad</div></div>
+    <div class="card-price">850,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Fatoush</div></div>
+    <div class="card-price">450,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Tabouleh</div></div>
+  </div>
+  <div class="variant-row"><span class="variant-label">Small</span><span class="variant-price">350,000 L.L</span></div>
+  <div class="variant-row"><span class="variant-label">Large</span><span class="variant-price">700,000 L.L</span></div>
+</section>
+
+<!-- MAN2OUSHI -->
+<div class="section-banner" id="man2oushi">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Man2oushi</div>
+    <div class="section-banner-sub">Saj oven baked</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Zaatar</div><div class="card-desc">Classic zaatar man2oushi on saj</div></div>
+    <div class="card-price">100,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Zaatar + Vegetables</div><div class="card-desc">Tomato, cucumber, mint, olives</div></div>
+    <div class="card-price">200,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Cheese</div><div class="card-desc">Melted cheese on saj bread</div></div>
+    <div class="card-price">200,000 L.L</div>
+  </div>
+</section>
+
+<!-- SANDWICHES -->
+<div class="section-banner" id="sandwiches">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Sandwiches</div>
+    <div class="section-banner-sub">Freshly prepared</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Labneh Sandwich</div><div class="card-desc">Authentic labneh, rocca, tomato, cucumber, olives, olive oil</div></div>
+    <div class="card-price">265,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Kashkaval Sandwich</div><div class="card-desc">Kashkaval, iceberg, tomato, cucumber, olive oil</div></div>
+    <div class="card-price">460,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Smoked Turkey</div><div class="card-desc">Turkey, iceberg, paprika, tomato</div></div>
+  </div>
+  <div class="variant-row"><span class="variant-label">Regular</span><span class="variant-price">455,000 L.L</span></div>
+  <div class="variant-row"><span class="variant-label">With kashkaval</span><span class="variant-price">595,000 L.L</span></div>
+  <div class="menu-card" style="margin-top:0.4rem">
+    <div class="card-info"><div class="card-name">Basterma</div><div class="card-desc">Basterma, iceberg, tomato, pickles</div></div>
+    <div class="card-price">490,000 L.L</div>
+  </div>
+  <div class="menu-card">
+    <div class="card-info"><div class="card-name">Tuna Sandwich</div><div class="card-desc">Tuna, iceberg, corn, pickles, mayonnaise</div></div>
+    <div class="card-price">560,000 L.L</div>
+  </div>
+</section>
+
+<!-- HOT/COLD DRINKS -->
+<div class="section-banner" id="hot-cold">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Hot / Cold Drinks</div>
+    <div class="section-banner-sub">Brewed to perfection</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card"><div class="card-info"><div class="card-name">Latte / Iced Latte</div></div><div class="card-price">450,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Black Coffee</div></div><div class="card-price">270,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Black Iced Coffee</div></div><div class="card-price">315,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Hot Chocolate</div></div><div class="card-price">360,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Vanilla Latte</div></div><div class="card-price">450,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Vanilla Iced Latte</div></div><div class="card-price">540,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Espresso</div></div><div class="card-price">270,000 L.L</div></div>
+</section>
+
+<!-- COLD DRINKS -->
+<div class="section-banner" id="cold-drinks">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Cold Drinks</div>
+    <div class="section-banner-sub">Refreshingly cool</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card"><div class="card-info"><div class="card-name">Fresh Juice</div><div class="card-desc">Orange, cocktail, lemonade</div></div><div class="card-price">700,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Ice Tea</div></div><div class="card-price">180,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Ice Coffee</div></div><div class="card-price">180,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Almaza</div></div><div class="card-price">360,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Beirut Beer</div></div><div class="card-price">270,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Pepsi / Pepsi Diet</div></div><div class="card-price">135,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Water</div></div></div>
+  <div class="variant-row"><span class="variant-label">Small</span><span class="variant-price">45,000 L.L</span></div>
+  <div class="variant-row"><span class="variant-label">Medium</span><span class="variant-price">90,000 L.L</span></div>
+  <div class="menu-card" style="margin-top:0.4rem"><div class="card-info"><div class="card-name">Rim Sparkling Water</div></div><div class="card-price">180,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Red Bull</div></div><div class="card-price">270,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Red Bull "Sugar Free"</div></div><div class="card-price">270,000 L.L</div></div>
+</section>
+
+<!-- SHISHA -->
+<div class="section-banner" id="shisha">
+  <div class="section-banner-overlay">
+    <div class="section-banner-title">Shisha</div>
+    <div class="section-banner-sub">Premium flavors</div>
+  </div>
+</div>
+<section class="menu-section">
+  <div class="menu-card"><div class="card-info"><div class="card-name">Double Apple</div></div><div class="card-price">700,000 L.L</div></div>
+  <div class="menu-card"><div class="card-info"><div class="card-name">Lemon Mint</div></div><div class="card-price">600,000 L.L</div></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Joumana Cooks</div>
+    <div class="footer-grid">
+      <a href="tel:03097752" class="footer-link"><span class="footer-link-icon">📞</span> 03-097752</a>
+      <a href="https://www.instagram.com/joumanacooks" target="_blank" class="footer-link"><span class="footer-link-icon">📸</span> @joumanacooks</a>
+      <a href="https://maps.app.goo.gl/c7cf1BY9dtF4Bq4i8" target="_blank" class="footer-link"><span class="footer-link-icon">📍</span> Sin el Fil — Freeway Center</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Joumana Cooks &middot; All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section-banner');
+  const navLinks = document.querySelectorAll('.cat-nav a');
+  const nav = document.querySelector('.cat-nav');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+        const activeLink = nav.querySelector('.active');
+        if (activeLink) activeLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '-80px 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      const y = target.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight - 8;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
